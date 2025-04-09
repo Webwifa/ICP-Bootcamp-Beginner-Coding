@@ -31,9 +31,7 @@ actor {
         //guardian clause to check if the user already exists
         switch (Map.get(userIdMap, phash, caller)) {
             case (?caller) {
-                // Map.set[userIdMap phash, caller, idFound];
-                // Map.set[userProfileMap nhash, nextId, name];
-                // idRecorded := idFound;
+         
             };
             case (_) {
                 Map.set(userIdMap, phash, caller, nextId);
@@ -44,13 +42,10 @@ actor {
             };
         };
 
-        // Search for existing user ID
         let foundId = switch (Map.get(userIdMap, phash, caller)) {
             case (?id) id;
             case (_) { return #err("User ID not found") };
         };
-
-        // Set the existing user profile name
         Map.set(userProfileMap, nhash, foundId, name);
 
         return #ok({ id = foundId; name = name });
